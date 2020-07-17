@@ -258,3 +258,18 @@ body {
 ::-webkit-scrollbar {
     width: 0;
 }
+
+/*Custom Form MDBootstrap*/
+@media (min-width: 600px) {
+    .navbar .dropdown-menu form {
+        width: 200px;
+    }
+}
+
+/*Custom Link MDBootstrap*/
+.navbar .dropdown-menu a {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 0.64rem;
+    font-weight: 300; 
+}

@@ -21,10 +21,11 @@ namespace Data.Access
             if (reader.Read())
             {
                 result = new User();
-                result.Name = reader.GetString(0);
-                result.Email = reader.GetString(1);
-                result.Role = reader.GetString(2);
-                result.Status = reader.GetBoolean(3);
+                result.Username = reader.GetString(0);
+                result.Name = reader.GetString(1);
+                result.Email = reader.GetString(2);
+                result.Role = reader.GetString(3);
+                result.Status = reader.GetBoolean(4);
             }
             connect.Close();
             return result;

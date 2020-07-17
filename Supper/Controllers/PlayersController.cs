@@ -55,15 +55,14 @@ namespace Supper.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Image,Description,Gender,Phone,Email,Price,Star")] Player player)
+        public async Task<IActionResult> Create([Bind("Id, Name, Image, Description, Gender, Phone, Email, Price, Star")] Player player)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(player);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            return View(player);
+            return Json("success");
         }
 
         // GET: Players/Edit/5

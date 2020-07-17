@@ -23,11 +23,11 @@ namespace Data.Entities
         [StringLength(10)]
         public string Phone { get; set; }
 
-        [StringLength(50)]
+        [StringLength(256)]
         public string Email { get; set; }
 
         public double? Price { get; set; }
 
-        public double? Star { get; set; }
+        public double? Star { get; }
     }
 }

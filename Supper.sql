@@ -1,18 +1,6 @@
-create database Supper
+﻿create database Supper
 Go
 use Supper
-Go
-create table [Player] (
-	[Id] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](256) NULL,
-	[Image] [nvarchar](256) NULL,
-	[Description] [nvarchar](MAX) NULL,
-	[Gender] [nvarchar](10) NULL,
-	[Phone] [char](10) NULL,
-	[Email] [varchar](50) UNIQUE NOT NULL,
-	[Price] [float] NULL,
-	[Star] [float] NULL,
-)
 Go
 create table [User] (
 	[Username] [nvarchar](256) PRIMARY KEY NOT NULL,
@@ -23,22 +11,36 @@ create table [User] (
 	[Status] [bit] DEFAULT 1 NOT NULL, 
 )
 Go
-insert into [User] values('votantai4899', 'tantai4899', 'votantai4899@gmail.com', 'admin', 1)
+insert into [User] values('votantai4899', 'tantai4899', N'Võ Tấn Tài', 'votantai4899@gmail.com', 'admin', 1)
+truncate table Player
+Go
+create table [Player] (
+	[Id] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](256) NULL,
+	[Image] [nvarchar](256) NULL,
+	[Description] [nvarchar](MAX) NULL,
+	[Gender] [nvarchar](10) NULL,
+	[Phone] [char](10) NULL,
+	[Email] [nvarchar](256) UNIQUE NOT NULL,
+	[Price] [float] NULL,
+	[Star] [float] DEFAULT 50 NULL,
+	FOREIGN KEY (Email) REFERENCES [User](Email) 
+)
 Go
 create table [Comment] (
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Content] [nvarchar](200) NOT NULL,
+	[Content] [nvarchar](256) NOT NULL,
 	[Date] [datetime] DEFAULT GETDATE() NOT NULL,
 	[PlayerId] [int] NOT NULL,
-	[Email] [nvarchar](256) UNIQUE NOT NULL,
+	[Email] [nvarchar](256) NOT NULL,
 )
 Go
-create proc CheckLogin
+alter proc CheckLogin
 @username nvarchar(256),
 @password nvarchar(256)
 as
 begin
-	Select [Name], [Email], [Role], [Status] From [User] Where Username = @username and Password = @password
+	Select [Username], [Name], [Email], [Role], [Status] From [User] Where Username = @username and Password = @password
 end
 Go
 create proc CreateUser

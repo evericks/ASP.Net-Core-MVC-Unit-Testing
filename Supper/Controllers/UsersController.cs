@@ -29,6 +29,7 @@ namespace Supper.Controllers
             if (result != null)
             {
                 HttpContext.Session.SetString("User", result.Name);
+                HttpContext.Session.SetString("Username", result.Username);
                 HttpContext.Session.SetString("Role", result.Role);
                 HttpContext.Session.SetString("Email", result.Email);
                 return Json("success");
@@ -52,15 +53,26 @@ namespace Supper.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(string id)
+        public IActionResult Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            return NotFound();
+        }
+
+        // POST: Users/Details
+        [HttpPost]
+        public async Task<IActionResult> Details([Bind("Username")] User usera)
+        {
+            if (usera.Username == null)
+            {
+                return NotFound();
+            }
 
             var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Username == id);
+                .FirstOrDefaultAsync(m => m.Username == usera.Username);
             if (user == null)
             {
                 return NotFound();

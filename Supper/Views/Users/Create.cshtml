@@ -2,9 +2,8 @@
 @using Microsoft.AspNetCore.Http;
 
 @{ ViewData["Title"] = "Create"; }
-
-@if (Context.Session.GetString("User") != null)
-{
+    @if (Context.Session.GetString("User") != null)
+    {
 <form asp-action="Logout" asp-controller="Users">
     <button type="submit">Logout</button>
 </form> }

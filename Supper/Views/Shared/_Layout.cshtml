@@ -30,11 +30,39 @@
                     <ul class="navbar-nav">
                         @if (@Context.Session.GetString("User") == null)
                         {
-            <a asp-action="Create" asp-controller="Users">Login</a> }
-                        else
-                        {
-            <li>Hello @Context.Session.GetString("User")</li>
-}
+            <a asp-action="Create" asp-controller="Users">Login</a>
+ }
+        else
+        {
+<li>
+    <div class="btn-group">
+        <button type="button" class="btn btn-info btn-sm">@Context.Session.GetString("User")</button>
+        <button type="button" class="btn btn-sm btn-info dropdown-toggle px-3" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu text-center">
+            <div class="dropdown-item">
+                <form asp-action="Details" asp-controller="Users">
+                    <input type="hidden" name="Username" value="@Context.Session.GetString("Username")" />
+                    <button type="submit" class="btn btn-sm btn-outline-primary btn-rounded">Information</button>
+                </form>
+            </div>
+            <div class="dropdown-item">
+                <a asp-action="Create" asp-controller="Players" class="btn btn-sm btn-outline-primary btn-rounded">Register</a>
+            </div>
+            <div class="dropdown-item">
+                <a asp-action="Create" asp-controller="Players" class="btn btn-sm btn-outline-primary btn-rounded">Manager</a>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item">
+                <form asp-action="Logout" asp-controller="Users">
+                    <button type="submit" class="btn btn-sm btn-outline-danger btn-rounded">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</li>}
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">

@@ -3,7 +3,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#image').attr('src', e.target.result);
+            $('#show-image').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 /*Ajax Create Comment*/
 $(function () {
-    let form = $("#create-comment-form");
+    let form = $("#comment-form");
     form.on('submit', function (e) {
         e.preventDefault();
         let url = form.attr("action");
@@ -36,10 +36,62 @@ $(function () {
             success: function (res) {
                 if (res === "success") {
                     location.reload();
+                } else {
+                    toastr.error("Comment failed, try again");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown + textStatus);
+            }
+        });
+    });
+});
+
+/*Ajax Create Player*/
+$(function () {
+    let form = $("#create-player");
+    form.on('submit', function (e) {
+        var image = $('#create-player input#upload').val();
+        $('#create-player input#image').attr('value', image.slice(12));
+        e.preventDefault();
+        let url = form.attr("action");  
+        let data = form.serialize();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function (res) {
+                if (res === "success") {
+                    toastr.success("Register successful");
+                } else {
+                    toastr.warning("Error");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                toastr.error("You are already registed");
+            }
+        });
+    });
+});
+
+/*Ajax Delete Comment*/
+$(function () {
+    let form = $("#delete-comment");
+    form.on('submit', function (e) {
+        e.preventDefault();
+        let url = form.attr("action");
+        let data = form.serialize();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function (res) {
+                if (res === "success") {
+                    location.reload();
+                } else {
+                    toastr.error("Delete failed, try again");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
             }
         });
     });

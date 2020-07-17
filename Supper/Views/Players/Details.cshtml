@@ -1,4 +1,5 @@
 ﻿@model dynamic
+@using Microsoft.AspNetCore.Http;
 
 @{ ViewData["Title"] = "Details"; }
 <div class="title">
@@ -63,35 +64,40 @@
             <a class="btn btn-sm btn-outline-black btn-rounded" asp-action="Index">Back to List</a>
         </div>
         <hr class="my-5">
-        <form asp-controller="Comments" asp-action="Create" method="post" id="create-comment-form">
-            <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
-                <textarea id="form23" class="md-textarea form-control" rows="2" required name="Content"></textarea>
-                <label for="form23">Reviews</label>
-            </div>
-            <input type="hidden" name="PlayerId" value="@Model.Player.Id" />
-            <div class="text-center">
-                <button type="submit" class="btn btn-sm btn-outline-pink btn-rounded mx-auto">Comment</button>
-            </div>
-        </form>
+        @if (Context.Session.GetString("Email") != null)
+        {
+<form asp-controller="Comments" asp-action="Create" id="comment-form">
+    <input type="hidden" name="PlayerId" value="@Model.Player.Id" />
+    <input type="hidden" name="Email" value="@Model.Player.Email" />
+    <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
+        <textarea id="form23" class="md-textarea form-control" rows="2" required name="Content"></textarea>
+        <label for="form23">Reviews</label>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-sm btn-outline-pink btn-rounded mx-auto">Comment</button>
+    </div>
+</form>}
     </div>
 </div>
 
 <div class="col-md-8">
-    @foreach (var items in Model.Comment)
+    @foreach (var item in Model.Comment)
     {
-@if (items.PlayerId == Model.Player.Id)
+@if (item.PlayerId == Model.Player.Id)
 {
 <div class="media my-3">
     <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="~/img/user.png"
          alt="Avatar">
     <div class="media-body">
-        <h5 class="mt-0 blue-text">@items.Email</h5>
-        <p class="d-inline">@items.Content</p>
-        <form class="d-inline" asp-controller="Comments" asp-action="Delete">
-            <input type="hidden" Name="Id" value="@items.Id" />
-            <input type="hidden" Name="PlayerId" value="@items.PlayerId" />
-            <button type="submit" class="btn btn-sm btn-outline-danger btn-rounded">Delete</button>
-        </form>
+        <h5 class="mt-0 blue-text">@item.Email</h5>
+        <p class="d-inline">@item.Content</p>
+        @if (item.Email == Context.Session.GetString("Email"))
+        {
+<form class="d-inline" asp-controller="Comments" asp-action="Delete" id="delete-comment">
+    <input type="hidden" name="Id" value="@item.Id" />
+    <input type="hidden" name="PlayerId" value="@item.PlayerId" />
+    <button type="submit" class="btn btn-sm btn-outline-danger btn-rounded">Delete</button>
+</form>}
     </div>
 </div>}}
 </div>
