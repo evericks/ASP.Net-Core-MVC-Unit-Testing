@@ -1,0 +1,73 @@
+﻿@model Data.Entities.Player
+
+@{ ViewData["Title"] = "Create"; }
+
+<div class="title">
+    <h2 class="text-center">Start up...</h2>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-8 card z-depth-1 my-5 mx-auto">
+            <h3 class="text-center my-3">Information</h3>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="md-form">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="md-form">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <input type="hidden" asp-for="Email" value="@User.Identity.Name" class="form-control" />
+                </div>
+                <div class="md-form">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" type="number" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <input type="hidden" asp-for="Star" value="50" class="form-control" />
+                </div>
+                <select asp-for="Gender" class="browser-default custom-select my-4">
+                    <option value="Nam">Nam</option>
+                    <option selected value="Nữ">Nữ</option>
+                </select>
+                <div class="custom-file">
+                    <input asp-for="Image" type="file" id="upload" class="custom-file-input form-control">
+                    <label class="custom-file-label" asp-for="Image" data-browse="Select"></label>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <div class="md-form text-center">
+                    <button type="submit" class="btn btn-outline-primary btn-rounded">Create</button>
+                </div>
+            </form>
+
+            <div class="text-danger">
+                @ViewBag.error
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-8 view my-5 mx-auto">
+            <img src="~/img/image.png" id="image" alt="" width="360">
+            <a>
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
