@@ -2,8 +2,11 @@
 
 @{ ViewData["Title"] = "Index"; }
 
-<div class="md-form active-cyan active-cyan-2 mb-3">
-    <input class="form-control" id="search" type="text" placeholder="Search" aria-label="Search">
+<div class="col-md-6">
+
+    <div class="md-form active-cyan active-cyan-2 mb-3">
+        <input class="form-control" id="search" type="text" placeholder="Search" aria-label="Search">
+    </div>
 </div>
 
 <div>
@@ -14,7 +17,7 @@
             {
 @if (item.Star >= 70)
 {
-<div class="col-lg-3 col-md-6 mb-4 animated fadeIn">
+<div class="player col-lg-3 col-md-6 mb-4 animated fadeIn">
     <div class="card collection-card z-depth-1-half">
         <div class="view zoom">
             <img src="~/img/player/@item.Image" class="img-fluid rounded"
@@ -42,7 +45,7 @@
             {
 @if (item.Star < 70)
 {
-<div class="col-lg-3 col-md-6 mb-4 animated fadeIn">
+<div class="player col-lg-3 col-md-6 mb-4 animated fadeIn">
     <div class="card collection-card z-depth-1-half">
         <div class="view zoom">
             <img src="~/img/player/@item.Image" class="img-fluid rounded"

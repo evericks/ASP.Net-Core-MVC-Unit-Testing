@@ -1,98 +1,131 @@
 ﻿@model Data.Entities.User;
 @using Microsoft.AspNetCore.Http;
 
-@{ ViewData["Title"] = "Create"; }
-    @if (Context.Session.GetString("User") != null)
-    {
-<form asp-action="Logout" asp-controller="Users">
-    <button type="submit">Logout</button>
-</form> }
-else
+@{ ViewData["Title"] = "Create";
+                Layout = "/Views/Shared/_Auth.cshtml"; }
+@if (Context.Session.GetString("User") != null)
 {
-<h2 class="text-center my-3">Welcome</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <div class="card card-cascade wider">
-                                <div class="view view-cascade overlay">
-                                    <img class="card-img-top" src="~/img/cover.png" alt="Card image cap">
-                                    <a>
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
-                                <div class="card-body card-body-cascade text-center">
-                                    <h5 class="blue-text pb-2"><strong>Đăng nhập</strong></h5>
-                                    <p class="card-text">
-                                        Hãy đăng nhập để có thể trải nghiệm thêm nhiều tính năng của chúng tôi
-                                    </p>
-                                </div>
-                                <div class="my-3">
-                                    <div class="text-center wow fadeIn animated">
-                                        <form asp-action="Login" asp-controller="Users" class="form-elegant" id="form-login">
-                                            <div class="md-form">
-                                                <input type="text" asp-for="Username" class="form-control" id="username">
-                                                <label>Username</label>
-                                            </div>
-                                            <div class="md-form pb-3">
-                                                <input type="password" asp-for="Password" class="form-control" id="password">
-                                                <label>Password</label>
-                                            </div>
-                                            <div class="text-center mb-3">
-                                                <button type="submit" class="btn btn-outline-light-blue btn-block btn-rounded z-depth-1a waves-effect waves-light">
-                                                    Sign in
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+<div class="row my-5">
+    <div class="col-md-5 mx-auto">
+        <div class="card card-image"
+             style="background-image: url(../img/playerbg.png);">
+            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                    <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Dual</h5>
+                    <h3 class="card-title pt-2"><strong>Giải pháp cho sự cô đơn</strong></h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
+                        optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
+                        Odit sed qui, dolorum!.
+                    </p>
+                    <a class="btn btn-pink" asp-action="Index" asp-controller="Players"><i class="fas fa-clone left"></i> View more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5 mx-auto">
+        <div class="card card-image" style="background-image: url(../img/apibg.png);">
+            <div class="text-white text-center d-flex align-items-center rgba-indigo-strong py-5 px-4">
+                <div>
+                    <h5 class="orange-text"><i class="fas fa-desktop"></i> RestAPI</h5>
+                    <h3 class="card-title pt-2"><strong>Cung cấp dịch vụ API</strong></h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
+                        optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
+                        Odit sed qui, dolorum!.
+                    </p>
+                    <a href="https://localhost:5001/api/playerservices" target="_blank" class="btn btn-deep-orange waves-effect waves-light"><i class="fas fa-clone left"></i> View API</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> }
+            else
+            {
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-body">
+            <div class="card card-cascade wider">
+                <div class="view view-cascade overlay">
+                    <img class="card-img-top" src="~/img/cover.png" alt="Card image cap">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body card-body-cascade text-center">
+                    <h5 class="blue-text pb-2"><strong>Đăng nhập</strong></h5>
+                    <p class="card-text">
+                        Hãy đăng nhập để có thể trải nghiệm thêm nhiều tính năng của chúng tôi
+                    </p>
+                </div>
+                <div class="my-3">
+                    <div class="text-center wow fadeIn animated">
+                        <form asp-action="Login" asp-controller="Users" class="form-elegant" id="form-login">
+                            <div class="md-form">
+                                <input type="text" asp-for="Username" class="form-control" id="username">
+                                <label>Username</label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <form asp-action="Create" asp-controller="Users" class="form-elegant" id="form-create">
-                            <div class="card-body">
-                                <div class="card card-cascade wider">
-                                    <div class="card-body card-body-cascade text-center">
-                                        <h5 class="blue-text pb-2"><strong>Đăng ký tài khoản</strong></h5>
-                                        <p class="card-text">
-                                            Chỉ với vài bước đơn giản bạn sẽ có cho mình một tài khoản
-                                        </p>
-                                        <p class="card-text">
-                                            Để đăng ký, vui lòng điền đầy đủ các thông tin bên dưới và xác nhận
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="my-5">
-                                    <div class="md-form">
-                                        <input type="text" asp-for="Username" class="form-control" id="username">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <input type="password" asp-for="Password" class="form-control" id="password">
-                                        <label>Password</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <input type="password" class="form-control" id="confirm">
-                                        <label>Confirm</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <input type="text" asp-for="Name" class="form-control" id="name">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <input type="text" asp-for="Email" class="form-control" id="email">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="text-center mt-5">
-                                        <button type="submit" class="btn btn-outline-light-green btn-block btn-rounded waves-effect waves-light">
-                                            Register
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="md-form pb-3">
+                                <input type="password" asp-for="Password" class="form-control" id="password">
+                                <label>Password</label>
+                            </div>
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn btn-outline-light-blue btn-block btn-rounded z-depth-1a waves-effect waves-light">
+                                    Sign in
+                                </button>
                             </div>
                         </form>
                     </div>
-                </div>}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="Create" asp-controller="Users" class="form-elegant" id="form-create">
+            <div class="card-body">
+                <div class="card card-cascade wider">
+                    <div class="card-body card-body-cascade text-center">
+                        <h5 class="blue-text pb-2"><strong>Đăng ký tài khoản</strong></h5>
+                        <p class="card-text">
+                            Chỉ với vài bước đơn giản bạn sẽ có cho mình một tài khoản
+                        </p>
+                        <p class="card-text">
+                            Để đăng ký, vui lòng điền đầy đủ các thông tin bên dưới và xác nhận
+                        </p>
+                    </div>
+                </div>
+                <div class="my-5">
+                    <div class="md-form">
+                        <input type="text" asp-for="Username" class="form-control" id="username">
+                        <label>Username</label>
+                    </div>
+                    <div class="md-form">
+                        <input type="password" asp-for="Password" class="form-control" id="password">
+                        <label>Password</label>
+                    </div>
+                    <div class="md-form">
+                        <input type="password" class="form-control" id="confirm">
+                        <label>Confirm</label>
+                    </div>
+                    <div class="md-form">
+                        <input type="text" asp-for="Name" class="form-control" id="name">
+                        <label>Name</label>
+                    </div>
+                    <div class="md-form">
+                        <input type="text" asp-for="Email" class="form-control" id="email">
+                        <label>Email</label>
+                    </div>
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-outline-light-green btn-block btn-rounded waves-effect waves-light">
+                            Register
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

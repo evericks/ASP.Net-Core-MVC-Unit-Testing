@@ -1,4 +1,16 @@
-﻿/*Image Preview*/
+﻿/*Spinner*/
+var spinner = new jQuerySpinner({
+    parentId: 'main-body'
+});
+
+function loading(time) {
+    spinner.show();
+    setTimeout(function () {
+        spinner.hide();
+    }, time);
+}
+
+/*Image Preview*/
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -16,7 +28,7 @@ $("#upload").change(function () {
 $(document).ready(function () {
     $("#search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#idols div.col-lg-3").filter(function () {
+        $(".player.col-lg-3").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
@@ -53,7 +65,7 @@ $(function () {
         var image = $('#create-player input#upload').val();
         $('#create-player input#image').attr('value', image.slice(12));
         e.preventDefault();
-        let url = form.attr("action");  
+        let url = form.attr("action");
         let data = form.serialize();
         $.ajax({
             type: "POST",
@@ -63,7 +75,7 @@ $(function () {
                 if (res === "success") {
                     toastr.success("Register successful");
                 } else {
-                    toastr.warning("Error");
+                    toastr.warning("Input data can't be blank");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -86,7 +98,10 @@ $(function () {
             data: data,
             success: function (res) {
                 if (res === "success") {
-                    location.reload();
+                    loading(1000);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000)
                 } else {
                     toastr.error("Delete failed, try again");
                 }
@@ -116,7 +131,9 @@ $(function () {
                 if (res === "failed") {
                     toastr.error('Username or password is incorrect');
                 } else if (res === "success") {
-                    $(location).attr('href', "Create")
+                    toastr.success('Login successful');
+                    loading(2000);
+                    setTimeout(function () { $(location).attr('href', 'Create'); }, 2000);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -155,6 +172,7 @@ $(function () {
                 success: function (res) {
                     if (res === "success") {
                         toastr.success('Account registration successful');
+                        loading(2000);
                     } else {
                         toastr.warning('Username or Email is already taken');
                     }

@@ -26,8 +26,8 @@ namespace Data.Entities
         [StringLength(256)]
         public string Email { get; set; }
 
-        public double? Price { get; set; }
+        public double Price { get; set; }
 
-        public double? Star { get; }
+        public double Star { get; set; }
     }
 }

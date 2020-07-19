@@ -1,0 +1,81 @@
+﻿@model Data.Entities.Player
+@using Microsoft.AspNetCore.Http;
+
+@{ ViewData["Title"] = "Delete"; }
+
+@if (Context.Session.GetString("Role") == "admin")
+{
+<div class="title">
+    <h2 class="text-center">@Html.DisplayFor(model => model.Name)</h2>
+</div>
+                <div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="my-5 text-center">
+                                <div class="col-md-8 view view-cascade overlay mx-auto">
+                                    <img src="~/img/player/@Html.DisplayFor(model => model.Image)" class="rounded" alt="" width="360">
+                                    <a>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 my-auto">
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.Name)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.Gender)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    +(84) @Html.DisplayFor(model => model.Phone)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Price)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.Price)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Star)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.Star)
+                                </dd>
+                            </dl>
+                            <form asp-action="Delete">
+                                <input type="submit" value="Delete" class="btn btn-outline-danger btn-rounded" /> |
+                                <a asp-action="Index">Back to List</a>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>}
+            else
+            {
+<div class="text-center text-typed my-5">
+    <a>Sorry, You are not authorized to access</a>
+</div>      }

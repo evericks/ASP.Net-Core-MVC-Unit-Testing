@@ -8,6 +8,8 @@
     <title>@ViewData["Title"] - Supper</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Spinner -->
+    <link rel="stylesheet" href="~/css/spinner.css">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
     <!-- Material Design Bootstrap -->
@@ -17,11 +19,12 @@
     <!-- Sakura -->
     <link rel="stylesheet" href="~/css/jquery-sakura.min.css">
 </head>
-<body>
+<body id="main-body">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Supper</a>
+                <a class="navbar-brand btn btn-sm btn-outline-light-blue" asp-area="" asp-controller="Home" asp-action="Index">Supper</a>
+                <a class="nav-link text-dark" asp-controller="Users" asp-action="Create">Services</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,47 +33,42 @@
                     <ul class="navbar-nav">
                         @if (@Context.Session.GetString("User") == null)
                         {
-            <a asp-action="Create" asp-controller="Users">Login</a>
+            <a asp-action="Create" asp-controller="Users" class="btn btn-sm btn-outline-secondary btn-rounded">Login</a>
  }
         else
         {
-<li>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info btn-sm">@Context.Session.GetString("User")</button>
-        <button type="button" class="btn btn-sm btn-info dropdown-toggle px-3" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="dropdown-menu text-center">
+            <li>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info btn-sm">@Context.Session.GetString("User")</button>
+                    <button type="button" class="btn btn-sm btn-info dropdown-toggle px-3" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu text-center">
+                        <div class="dropdown-item">
+                            <form asp-action="Details" asp-controller="Users">
+                                <input type="hidden" name="Username" value="@Context.Session.GetString("Username")" />
+                                <button type="submit" class="btn btn-sm btn-outline-primary btn-rounded">Account</button>
+                            </form>
+                        </div>
+                        <div class="dropdown-item">
+                            <a asp-action="Create" asp-controller="Players" class="btn btn-sm btn-outline-primary btn-rounded">Register</a>
+                        </div>
+                        @if (Context.Session.GetString("Role") == "admin")
+                        {
             <div class="dropdown-item">
-                <form asp-action="Details" asp-controller="Users">
-                    <input type="hidden" name="Username" value="@Context.Session.GetString("Username")" />
-                    <button type="submit" class="btn btn-sm btn-outline-primary btn-rounded">Information</button>
-                </form>
-            </div>
-            <div class="dropdown-item">
-                <a asp-action="Create" asp-controller="Players" class="btn btn-sm btn-outline-primary btn-rounded">Register</a>
-            </div>
-            <div class="dropdown-item">
-                <a asp-action="Create" asp-controller="Players" class="btn btn-sm btn-outline-primary btn-rounded">Manager</a>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-item">
-                <form asp-action="Logout" asp-controller="Users">
-                    <button type="submit" class="btn btn-sm btn-outline-danger btn-rounded">Logout</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</li>}
-                    </ul>
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                <a asp-action="Index" asp-controller="Admin" class="btn btn-sm btn-outline-primary btn-rounded">Manager</a>
+            </div>}
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item">
+                            <form asp-action="Logout" asp-controller="Users">
+                                <button type="submit" class="btn btn-sm btn-outline-danger btn-rounded">Signout</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </li>}
+
                     </ul>
                 </div>
             </div>
@@ -95,6 +93,8 @@
     <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/lib/bootstrap/dist/js/mdb.min.js"></script>
+    <!-- Spinner -->
+    <script type="text/javascript" src="~/js/spinner.js"></script>
     <!-- Sakura Effect JavaScript -->
     <script src="~/js/jquery-sakura.min.js"></script>
     <!-- Your custom scripts (optional) -->

@@ -1,0 +1,66 @@
+﻿@model dynamic
+@using Microsoft.AspNetCore.Http;
+
+@{ ViewData["Title"] = "View";
+    Layout = "/Views/Shared/_Auth.cshtml";}
+
+@if (Context.Session.GetString("Role") == "admin")
+{
+
+<div class="title">
+    <h2 class="text-center">Players Management</h2>
+</div>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Gender
+                            </th>
+                            <th>
+                                Phone
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Modify
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Player)
+                        {
+        <tr class="text-center">
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Gender
+            </td>
+            <td>
+                +(84) @item.Phone
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td class="text-center">
+                @Html.ActionLink("Details", "Details", new { id = @item.Id }, new { @class = "btn btn-sm btn-outline-light-blue btn-rounded" })
+            </td>
+        </tr>}
+                    </tbody>
+                </table> }
+                            else
+                            {
+                <div class="text-center">
+                    <h2 class="mt-5 font-weight-bold red-text">403</h2>
+                    <h4 class="my-5">Sorry, You are not authorized to access</h4>
+                </div>}

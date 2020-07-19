@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 
 @{ ViewData["Title"] = "Details"; }
+
 <div class="title">
     <h2 class="text-center">@Model.Player.Name's Profile</h2>
 </div>
@@ -48,7 +49,7 @@
                 Price
             </dt>
             <dd class="col-sm-6">
-                @Model.Player.Price $ for a day
+                @Model.Player.Price $
             </dd>
             <dt class="col-sm-6">
                 Quality
@@ -68,7 +69,7 @@
         {
 <form asp-controller="Comments" asp-action="Create" id="comment-form">
     <input type="hidden" name="PlayerId" value="@Model.Player.Id" />
-    <input type="hidden" name="Email" value="@Model.Player.Email" />
+    <input type="hidden" name="Email" value="@Context.Session.GetString("Email")" />
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <textarea id="form23" class="md-textarea form-control" rows="2" required name="Content"></textarea>
         <label for="form23">Reviews</label>
@@ -91,7 +92,7 @@
     <div class="media-body">
         <h5 class="mt-0 blue-text">@item.Email</h5>
         <p class="d-inline">@item.Content</p>
-        @if (item.Email == Context.Session.GetString("Email"))
+        @if (item.Email == Context.Session.GetString("Email") || Model.Player.Email == Context.Session.GetString("Email"))
         {
 <form class="d-inline" asp-controller="Comments" asp-action="Delete" id="delete-comment">
     <input type="hidden" name="Id" value="@item.Id" />

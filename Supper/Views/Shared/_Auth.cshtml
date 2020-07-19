@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="progress md-progress success-color mt-3">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

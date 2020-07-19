@@ -125,7 +125,7 @@ body {
 }
 
 .title {
-    margin-top: 6rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     color: #5d4267;
 }
@@ -262,14 +262,28 @@ body {
 /*Custom Form MDBootstrap*/
 @media (min-width: 600px) {
     .navbar .dropdown-menu form {
-        width: 200px;
+        width: 0;
     }
 }
 
 /*Custom Link MDBootstrap*/
 .navbar .dropdown-menu a {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
     font-size: 0.64rem;
     font-weight: 300; 
+}
+
+/*Swiper Carousel*/
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
 }

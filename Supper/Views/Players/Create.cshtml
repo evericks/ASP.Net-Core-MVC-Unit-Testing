@@ -1,22 +1,31 @@
 ﻿@model Data.Entities.Player
 @using Microsoft.AspNetCore.Http;
 
-@{ ViewData["Title"] = "Create"; }
+@{ ViewData["Title"] = "Create";
+    Layout = "/Views/Shared/_Auth.cshtml";
+    }
 
 @if (Context.Session.GetString("User") == null)
 {
-<h2>Please login and try again!</h2> }
-            else
-            {
-<div class="title">
-    <h2 class="text-center">Start up...</h2>
-</div>
-                <hr />
+    <div class="text-center">
+        <h2 class="mt-5 font-weight-bold red-text">403</h2>
+        <h4 class="my-5">Sorry, You are not authorized to access</h4>
+    </div>
+ }
+else
+{
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="col-md-8 card z-depth-1 my-5 mx-auto">
-                                            <h3 class="text-center my-3">Information</h3>
-                                            <form asp-action="Create" id="create-player">
+                                        <div class="col-md-8 my-5 mx-auto">
+                                            <form asp-action="Create" class="form-elegant" id="create-player">
+                                                <div class="card card-cascade wider">
+                                                    <div class="card-body card-body-cascade text-center">
+                                                        <h5 class="blue-text pb-2"><strong>Đăng ký dịch vụ</strong></h5>
+                                                        <p class="card-text">
+                                                            Để đăng ký, vui lòng điền đầy đủ các thông tin bên dưới và xác nhận
+                                                        </p>
+                                                    </div>
+                                                </div>
                                                 <div class="md-form">
                                                     <label asp-for="Name" class="control-label"></label>
                                                     <input asp-for="Name" class="form-control" required />
@@ -46,7 +55,7 @@
                                                     <input type="file" id="upload" class="custom-file-input form-control">
                                                     <label class="custom-file-label" asp-for="Image" data-browse="Select"></label>
                                                 </div>
-                                                <input asp-for="Image" type="text" class="form-control" value="Default.png" hidden id="image"/>
+                                                <input asp-for="Image" type="text" class="form-control" value="Default.png" hidden id="image" />
                                                 <div class="md-form text-center">
                                                     <button type="submit" class="btn btn-outline-primary btn-rounded">Create</button>
                                                 </div>
@@ -56,7 +65,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="col-md-8 view my-5 mx-auto">
-                                            <img src="~/img/image.png" id="show-image" alt="" width="360">
+                                            <img src="" id="show-image" alt="" width="360">
                                             <a>
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>
