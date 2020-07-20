@@ -1,4 +1,9 @@
-﻿/*Spinner*/
+﻿/*Document Ready*/
+$('document').ready(function () {
+    $('a.api-link').attr('href', location.origin + "/api/playerservices");
+})
+
+/*Spinner*/
 var spinner = new jQuerySpinner({
     parentId: 'main-body'
 });
@@ -87,21 +92,19 @@ $(function () {
 
 /*Ajax Delete Comment*/
 $(function () {
-    let form = $("#delete-comment");
+    let form = $(".delete-comment");
     form.on('submit', function (e) {
         e.preventDefault();
-        let url = form.attr("action");
-        let data = form.serialize();
+        let url = $(this).attr("action");
+        let data = $(this).serialize();
+        let cmt = $(this);
         $.ajax({
             type: "POST",
             url: url,
             data: data,
             success: function (res) {
-                if (res === "success") {
-                    loading(1000);
-                    setTimeout(function () {
-                        location.reload();
-                    }, 1000)
+                if (res.id != null) {
+                    cmt.parents(".media").remove();
                 } else {
                     toastr.error("Delete failed, try again");
                 }

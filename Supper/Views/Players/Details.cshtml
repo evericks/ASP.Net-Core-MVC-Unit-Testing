@@ -94,7 +94,7 @@
         <p class="d-inline">@item.Content</p>
         @if (item.Email == Context.Session.GetString("Email") || Model.Player.Email == Context.Session.GetString("Email"))
         {
-<form class="d-inline" asp-controller="Comments" asp-action="Delete" id="delete-comment">
+<form class="d-inline delete-comment" asp-controller="Comments" asp-action="Delete">
     <input type="hidden" name="Id" value="@item.Id" />
     <input type="hidden" name="PlayerId" value="@item.PlayerId" />
     <button type="submit" class="btn btn-sm btn-outline-danger btn-rounded">Delete</button>

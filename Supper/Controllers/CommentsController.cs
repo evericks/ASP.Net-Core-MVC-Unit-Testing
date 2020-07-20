@@ -62,7 +62,7 @@ namespace ThienThai.Controllers
             var comments = await _context.Comment.FindAsync(id);
             _context.Comment.Remove(comments);
             await _context.SaveChangesAsync();
-            return Json("success");
+            return Json(new { id=id});
         }
 
     }
