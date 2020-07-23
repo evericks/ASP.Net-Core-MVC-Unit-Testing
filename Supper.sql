@@ -73,4 +73,12 @@ as
 begin 
 	Update Player Set Star = 50 where Star = 0 or Star = Null
 end
+Go
+create proc ChangePass
+@username nvarchar(256),
+@password nvarchar(256)
+as
+begin
+	Update [User] Set [Password] = @password Where Username = @username 
+end
 

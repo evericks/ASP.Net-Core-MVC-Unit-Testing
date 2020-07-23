@@ -186,3 +186,32 @@ $(function () {
         }
     });
 });
+
+/*Change Password*/
+$(function () {
+    let form = $("#change-pass");
+    form.on('submit', function (e) {
+        e.preventDefault();
+        let url = $(this).attr("action");
+        let data = $(this).serialize();
+        let cmt = $(this);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function (res) {
+                if ($('#change-pass input#new-pass').val() == $('#change-pass input#confirm').val()) {
+                    if (res == "success") {
+                        toastr.success("Success");
+                    } else {
+                        toastr.error("Failed, try again");
+                    }
+                } else {
+                    toastr.warning("Password does not match");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            }
+        });
+    });
+});

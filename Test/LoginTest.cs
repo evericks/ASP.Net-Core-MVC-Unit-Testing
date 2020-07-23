@@ -1,7 +1,6 @@
 ﻿using Data.Access;
 using Data.Entities;
 using NUnit.Framework;
-using Supper.Controllers;
 
 namespace ManualTest
 {

@@ -7,7 +7,7 @@ namespace Data.Access
 {
     public class UserAccess
     {
-        readonly SqlConnection connect = new SqlConnection("Data Source=JANGLEE\\SE130716;Initial Catalog=Supper;User ID=sa;Password=tantai4899");
+        readonly SqlConnection connect = new SqlConnection("Server=tcp:oiog.database.windows.net,1433;Initial Catalog=Supper;Persist Security Info=False;User ID=oiog;Password=Sieuadmin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
         public User CheckLogin(User user)
         {
@@ -69,6 +69,19 @@ namespace Data.Access
                 res = Convert.ToInt32(create.Value);
                 connect.Close();
             }
+            return res;
+        }
+
+        public bool ChangePass(User user)
+        {
+            bool res = false;
+            SqlCommand command = new SqlCommand("ChangePass", connect);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@username", user.Username);
+            command.Parameters.AddWithValue("@password", user.Password);
+            connect.Open();
+            res = command.ExecuteNonQuery() > 0;
+            connect.Close();
             return res;
         }
     }

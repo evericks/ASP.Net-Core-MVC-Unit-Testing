@@ -7,36 +7,34 @@
 <h1>Details</h1>
 
 <div>
-    <h4>User</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+    <div class="row">
+        <dl class="row col-md 8">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+        <div class="col-md-4">
+            <form asp-action="ChangePass" asp-controller="Users" class="form-elegant" id="change-pass">
+                <input type="hidden" name="Username" class="form-control" value="@Model.Username">
+                <div class="md-form">
+                    <input type="password" name="Password" class="form-control" id="new-pass">
+                    <label>New Password</label>
+                </div>
+                <div class="md-form pb-3">
+                    <input type="password" class="form-control" id="confirm">
+                    <label>Confirm</label>
+                </div>
+                <div class="text-center mb-3">
+                    <button type="submit" class="btn btn-outline-light-blue btn-block btn-rounded z-depth-1a waves-effect waves-light">
+                        Change
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Username">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
