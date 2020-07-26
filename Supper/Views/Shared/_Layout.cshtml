@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand btn btn-sm btn-outline-light-blue" asp-area="" asp-controller="Home" asp-action="Index">Supper</a>
-                <a class="nav-link text-dark" asp-controller="Users" asp-action="Create">Services</a>
+                <a class="nav-link text-dark" asp-controller="Users" asp-action="Index">Services</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@
                     <ul class="navbar-nav">
                         @if (@Context.Session.GetString("User") == null)
                         {
-            <a asp-action="Create" asp-controller="Users" class="btn btn-sm btn-outline-secondary btn-rounded">Login</a>
+            <a asp-action="Index" asp-controller="Users" class="btn btn-sm btn-outline-secondary btn-rounded">Login</a>
  }
         else
         {
@@ -68,7 +68,6 @@
                     </div>
                 </div>
             </li>}
-
                     </ul>
                 </div>
             </div>

@@ -136,7 +136,7 @@ $(function () {
                 } else if (res === "success") {
                     toastr.success('Login successful');
                     loading(2000);
-                    setTimeout(function () { $(location).attr('href', 'Create'); }, 2000);
+                    setTimeout(function () { $(location).attr('href', 'Users'); }, 2000);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
