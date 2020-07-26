@@ -75,7 +75,7 @@ namespace Supper.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
+        // GET: Users
         public IActionResult Index()
         {
             return View();
@@ -85,7 +85,7 @@ namespace Supper.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public IActionResult Index([Bind] User user)
+        public IActionResult Create([Bind] User user)
         {
             int result = dao.CreateUser(user);
             if (result == 1)
