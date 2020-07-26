@@ -28,7 +28,7 @@ namespace ThienThai.Controllers
         // GET: Player/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            if (!IdolExists(id))
+            if (!PlayerExists(id))
             {
                 return NotFound();
             }
@@ -49,12 +49,12 @@ namespace ThienThai.Controllers
                 return NotFound();
             }
 
-            var idol = await _context.Player.FindAsync(id);
-            if (idol == null)
+            var player = await _context.Player.FindAsync(id);
+            if (player == null)
             {
                 return NotFound();
             }
-            return View(idol);
+            return View(player);
         }
 
         // GET: Player/Delete/5
@@ -65,14 +65,14 @@ namespace ThienThai.Controllers
                 return NotFound();
             }
 
-            var idol = await _context.Player
+            var player = await _context.Player
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (idol == null)
+            if (player == null)
             {
                 return NotFound();
             }
 
-            return View(idol);
+            return View(player);
         }
 
         // POST: Player/Delete/5
@@ -80,17 +80,17 @@ namespace ThienThai.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var idol = await _context.Player.FindAsync(id);
-            _context.Player.Remove(idol);
+            var player = await _context.Player.FindAsync(id);
+            _context.Player.Remove(player);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IdolExists(int id)
+        private bool PlayerExists(int id)
         {
             return _context.Player.Any(e => e.Id == id);
         }
-        private bool IdolEmailExists(string email)
+        private bool PlayerEmailExists(string email)
         {
             return _context.Player.Any(e => e.Email == email);
         }
