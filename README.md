@@ -7,6 +7,7 @@ Not available
 
 ## Features ##
 - Manage products.
+- User authentication.
 - Unit testing.
 
 ## Author & License
